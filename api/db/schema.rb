@@ -19,13 +19,6 @@ ActiveRecord::Schema.define(version: 20170316091003) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "budgets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "month"
-    t.integer  "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "provider",                             default: "email", null: false
     t.string   "uid",                                  default: "",      null: false
