@@ -16,8 +16,6 @@ enum ApiDefinition {
     case addAccount(account: DTO.Account)
     case updateAccount(account: DTO.Account)
     case deleteAccount(account: DTO.Account)
-    case getBudgets
-    case addBudget(budget: DTO.Budget)
 }
 
 protocol Authorizable {
@@ -52,15 +50,13 @@ extension ApiDefinition: TargetType, Authorizable {
             return "/accounts"
         case .updateAccount(let account), .deleteAccount(let account):
             return "/accounts/\(account.id)"
-        case .getBudgets, .addBudget:
-            return "/budgets"
         }
     }
     var method: Moya.Method {
         switch self {
-        case .getUser, .getAccounts, .getBudgets:
+        case .getUser, .getAccounts:
             return .get
-        case .signIn, .addAccount, .addBudget:
+        case .signIn, .addAccount:
             return .post
         case .updateAccount:
             return .put
@@ -70,19 +66,17 @@ extension ApiDefinition: TargetType, Authorizable {
     }
     var parameters: [String: Any]? {
         switch self {
-        case .getUser, .getAccounts, .deleteAccount, .getBudgets:
+        case .getUser, .getAccounts, .deleteAccount:
             return nil
         case .signIn(let email, let password):
             return ["email": email, "password": password]
         case .addAccount(let account), .updateAccount(let account):
             return ["name": account.name, "balance": account.balance]
-        case .addBudget(let budget):
-            return ["month": budget.month, "amount": budget.amount]
         }
     }
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case .signIn, .addAccount, .updateAccount, .addBudget:
+        case .signIn, .addAccount, .updateAccount:
             return JSONEncoding.default
         default:
             return URLEncoding.default
@@ -103,15 +97,6 @@ extension ApiDefinition: TargetType, Authorizable {
             return data
         case .deleteAccount(let account), .updateAccount(let account), .addAccount(let account):
             return "{\"id\": \(account.id), \"name\": \(account.name), \"balance\": \(account.balance)}".utf8Encoded
-        case .getBudgets:
-            // Provided you have a file named accounts.json in your bundle.
-            guard let path = Bundle.main.path(forResource: "budgets", ofType: "json"),
-                  let data = Data(base64Encoded: path) else {
-                return Data()
-            }
-            return data
-        case .addBudget(let budget):
-            return "{\"id\": \(budget.id), \"month\": \(budget.month), \"amount\": \(budget.amount)}".utf8Encoded
         }
     }
     var task: Task {
