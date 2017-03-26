@@ -3,11 +3,11 @@ class BudgetsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    p params
+    Budget.create(params.require(:budget).permit(:month, :amount))
   end
 
   def index
-    render json: [{month: '2017-03', amount: 1000}]
+    render json: Budget.all
   end
 end
 
