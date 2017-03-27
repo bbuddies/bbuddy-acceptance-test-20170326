@@ -15,4 +15,9 @@ class BudgetsPage < PageBase
     wait_for_text budget.month
     wait_for_text budget.amount
   end
+
+  def assert_budget_not_exists(budget)
+    wait_for_element_does_not_exist 'Save'
+    wait_for_text_does_not_exist budget.amount
+  end
 end
