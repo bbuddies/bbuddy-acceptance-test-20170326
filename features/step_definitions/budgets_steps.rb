@@ -4,7 +4,7 @@ When(/^add budget as (month "[^"]*" and amount \d+)$/) do |budget|
   AddBudgetPage.open.add_budget(budget)
 end
 
-When(/^query budgets from "[^"]*" to "[^"]*"/) do |query|
+When(/^query budgets (from "[^"]*" to "[^"]*")$/) do |query|
   DashboardPage.open.go_to_budgets
   BudgetsPage.open.go_to_query_budget
   QueryBudgetPage.open.query_budget(query)
