@@ -10,6 +10,10 @@ class BudgetsPage < PageBase
     touch 'Add'
   end
 
+  def go_to_query_budget
+    touch 'Query'
+  end
+
   def assert_budget_exists(budget)
     wait_for_element_does_not_exist 'Save'
     wait_for_text budget.month
