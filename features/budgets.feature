@@ -20,5 +20,4 @@ Feature: Budgets
     Given a exist budget as month "2017-03" and amount 3000
     And a exist budget as month "2017-05" and amount 1000
     When query budgets from "2017-03-15" to "2017-04-15"
-    Then I can see the total of budgets as below
-      | 1600 |
+    Then I can see the total of budgets is 1600

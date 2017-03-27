@@ -10,7 +10,9 @@ class BudgetsPage < PageBase
     touch 'Add'
   end
 
-  def go_to_query_budget
+  def query_budget(query)
+    enter_text 'start', query[:start_date]
+    enter_text 'end', query[:end_date]
     touch 'Query'
   end
 

@@ -6,11 +6,11 @@ end
 
 When(/^query budgets (from "[^"]*" to "[^"]*")$/) do |query|
   DashboardPage.open.go_to_budgets
-  BudgetsPage.open.go_to_query_budget
-  QueryBudgetPage.open.query_budget(query)
+  # BudgetsPage.open.go_to_query_budget
+  BudgetsPage.open.query_budget(query)
 end
 
-Then(/^I can see the total of budgets as below$/) do |total|
+Then(/^I can see the total of budgets is (\d+)$/) do |total|
   TotalBudgetPage.open.assert_total_exists(total)
 end
 
