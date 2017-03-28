@@ -1,8 +1,9 @@
 # language: zh-CN
 # encoding: UTF-8
-#功能: 查询输入日期和终止日期的全部预算
+
 @login
-Feature: Total
+功能: Total
+#: 查询输入日期和终止日期的全部预算
 
   场景: 1. 输入三个月的总预算
     假如存在如下预算
