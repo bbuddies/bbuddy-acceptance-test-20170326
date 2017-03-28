@@ -11,8 +11,8 @@ class BudgetsPage < PageBase
   end
 
   def query_budget(query)
-    enter_text 'start', query[:start_date]
-    enter_text 'end', query[:end_date]
+    enter_text 'start_date', query[:start_date]
+    enter_text 'end_date', query[:end_date]
     touch 'Query'
   end
 
