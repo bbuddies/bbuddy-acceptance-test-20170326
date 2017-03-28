@@ -28,6 +28,5 @@ class BudgetsController < ApplicationController
   def budget_params
     params.require(:budget).permit(:month, :amount)
   end
-
 end
 

@@ -6,7 +6,6 @@ end
 
 When(/^query budgets (from "[^"]*" to "[^"]*")$/) do |query|
   DashboardPage.open.go_to_budgets
-  # BudgetsPage.open.go_to_query_budget
   BudgetsPage.open.query_budget(query)
 end
 
@@ -20,10 +19,10 @@ Then(/^I can see the budget in the list as below$/) do |budgets|
   end
 end
 
-Given(/^a exist budget as (month "[^"]*" and amount \d+)$/) do |budget|
-  DashboardPage.open.go_to_budgets
-  BudgetsPage.open.go_to_add_budget
-  AddBudgetPage.open.add_budget(budget)
+Given(/^exists the following budgets$/) do |budgets|
+  budgets.each do |budget|
+    budget.save!
+  end
 end
 
 Then(/^doesn't exist budget as (month "[^"]*" and amount \d+)$/) do |budget|
